@@ -1,6 +1,6 @@
 # JAVA BÁSICO
 - ✔️ Introducción a Java.
-- ⌛ Estructuras de control.
+- ✔️ Estructuras de control.
 - ⌛ Introducción a la POO.
 - ⌛ Repaso de la semana.
 - ⌛ Propiedades de la POO.
