@@ -1,6 +1,6 @@
 # Ejercicios realizados durante el bootcamp
 ## Java básico
-- [*] Introducción a Java.
+- [x] Introducción a Java.
 - [] Estructuras de control.
 - [] Introducción a la POO.
 - [] Repaso de la semana.
