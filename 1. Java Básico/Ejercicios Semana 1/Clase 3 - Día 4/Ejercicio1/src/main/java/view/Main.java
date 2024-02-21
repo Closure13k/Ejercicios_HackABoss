@@ -27,6 +27,6 @@ public class Main {
         System.out.println(elecSinParam.getMarca());
         //! ¿Se obtiene algún valor? De ser así… ¿Qué valor se obtiene?
         //? Se obtiene una representación de valor nulo al ser cadena. En caso de ser tipo de dato sería excepción.
-        
+
     }
 }
