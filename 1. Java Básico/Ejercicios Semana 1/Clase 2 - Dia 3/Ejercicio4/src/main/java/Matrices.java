@@ -28,7 +28,7 @@ public class Matrices {
 
             //? Output y recepción.
             printSeats(seats);
-            System.out.println("Puede escribir -1 o cerrar el cuadro de texto para finalizar el programa.");
+            System.out.println("Puede escribir -1 para finalizar el programa.");
 
             try {
                 System.out.println("Elija la fila:");
