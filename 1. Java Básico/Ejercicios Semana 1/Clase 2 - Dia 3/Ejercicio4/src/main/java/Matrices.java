@@ -63,7 +63,7 @@ public class Matrices {
                 System.err.println("Número de fila o asiento no válido.");
             }
             //? Al tener break, esto será redundante.
-        } while (rowInput != -1 || seatInput != -1);
+        } while (true);
 
         //? Output final y liberamos recurso.
         System.err.println("Registro finalizado. Resultado final:");
