@@ -2,7 +2,7 @@
 - ✔️ Introducción a Java.
 - ✔️ Estructuras de control.
 - ✔️ Introducción a la POO.
-- ⌛ Repaso de la semana.
+- ✔️ Repaso de la semana.
 - ⌛ Propiedades de la POO.
 - ⌛ Colecciones en Java.
 - ⌛ Conexión a base de datos con JDBC/JPA.
