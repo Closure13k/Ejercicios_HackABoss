@@ -73,7 +73,7 @@ public class MainTest {
     private void givenUnknown_CountsZero() {
         assertEquals(
                 0,
-                Main.getVeggiesByColour(verduras, "VERDE").count(),
+                Main.getVeggiesByColour(verduras, "AYAYAYAYA").count(),
                 "Dado un color no registrado, se devolverán 0 elementos."
         );
     }

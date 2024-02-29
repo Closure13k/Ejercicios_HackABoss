@@ -53,11 +53,14 @@ public class Main {
      * @param verduras El array de verduras
      * @param colour   El color a filtrar.
      * @return El resultado de dicho filtrado para su uso terminal (en su caso,
-     * ser recogido por {@link #collectVeggiesToString(Stream)}.
+     * ser recogido por {@link #collectVeggiesToString(Stream)}).
      */
     public static Stream<Verdura> getVeggiesByColour(Verdura[] verduras, String colour) {
+        if(colour == null){
+            throw new IllegalArgumentException("El color no puede ser nulo.");
+        }
         return Arrays.stream(verduras).filter(
-                verdura -> verdura.getColor().toLowerCase().contains(colour));
+                verdura -> verdura.getColor().toLowerCase().contains(colour.trim().toLowerCase()));
     }
 
     /**
