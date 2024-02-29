@@ -55,7 +55,7 @@ public class Main {
      * @return El resultado de dicho filtrado para su uso terminal (en su caso,
      * ser recogido por {@link #collectVeggiesToString(Stream)}.
      */
-    private static Stream<Verdura> getVeggiesByColour(Verdura[] verduras, String colour) {
+    public static Stream<Verdura> getVeggiesByColour(Verdura[] verduras, String colour) {
         return Arrays.stream(verduras).filter(
                 verdura -> verdura.getColor().toLowerCase().contains(colour));
     }
