@@ -1,3 +1,6 @@
+import mascota.Mascota;
+import mascota.RegistroMascotas;
+
 public class Ejercicio2 {
     /**
      * Una clínica veterinaria necesita un sistema para administrar su registro de mascotas, para ello,
@@ -21,6 +24,13 @@ public class Ejercicio2 {
      */
 
     public static void main(String[] args) {
+        RegistroMascotas registroMascotas = new RegistroMascotas();
+        registroMascotas.generarMascotasAleatorias("Firulais", "Mishi", "Pepito", "Piolin", "Rex", "Coco", "Paco", "Lola", "Pepa", "Pepito");
+        System.out.println("Cantidad de mascotas: " + registroMascotas.cantidadMascotas());
+        System.out.println("Mascota buscada por nombre: " + registroMascotas.buscar("Firulais"));
+        System.out.println("Mascotas buscadas por especie: " + registroMascotas.buscarPorEspecie("Gato")
+                .stream()
+                .reduce("", (s, mascota) -> s + mascota.getNombre() + ", ", String::concat));
 
     }
 

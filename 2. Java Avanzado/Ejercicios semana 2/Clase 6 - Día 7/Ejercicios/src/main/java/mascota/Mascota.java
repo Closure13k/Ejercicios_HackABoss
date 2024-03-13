@@ -1,15 +1,23 @@
 package mascota;
 
 
+import java.util.Map;
 
-public class Mascota<T extends Especie> {
+public class Mascota<T> {
+
+    public static final Map<Integer, String> ESPECIES = Map.of(
+            1, "Perro",
+            2, "Gato",
+            3, "Ave",
+            4, "Reptil"
+    );
 
     private int id;
     private String nombre;
     private int edad;
-    private Especie especie;
+    private T especie;
 
-    public Mascota(int id, String nombre, int edad, Especie especie) {
+    public Mascota(int id, String nombre, int edad, T especie) {
         this.id = id;
         this.nombre = nombre;
         this.edad = edad;
@@ -43,11 +51,11 @@ public class Mascota<T extends Especie> {
         this.edad = edad;
     }
 
-    public Especie getEspecie() {
+    public T getEspecie() {
         return especie;
     }
 
-    public void setEspecie(Especie especie) {
+    public void setEspecie(T especie) {
         this.especie = especie;
     }
 
@@ -59,5 +67,14 @@ public class Mascota<T extends Especie> {
                 ", edad=" + edad +
                 ", especie=" + especie +
                 '}';
+    }
+
+    //Sobreescribe el equals para comparar por el id.
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Mascota<?> mascota = (Mascota<?>) obj;
+        return id == mascota.id;
     }
 }
