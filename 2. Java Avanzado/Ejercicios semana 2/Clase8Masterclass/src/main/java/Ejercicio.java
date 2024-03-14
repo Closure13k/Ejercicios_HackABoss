@@ -1,3 +1,5 @@
+import models.Vehiculo;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,17 +18,14 @@ public class Ejercicio {
         expresiones lambda, obtén una lista de vehículos ordenados
         por precio de menor a mayor, imprime por pantalla el resultado.
     */
-        //?1
-        vehiculos.sort((v1, v2) -> (int) (v2.getCosto() - v1.getCosto()));
-
-        vehiculos.sort(comparingDouble(Vehiculo::getCosto).reversed());
+        vehiculos.sort(comparingDouble(Vehiculo::getCosto));
 
         // De la misma forma anterior imprime una lista ordenada
         // por marca y a su vez por precio.
         System.out.println("Ordenados por marca y precio:");
         vehiculos.stream()
                 .sorted(comparing(Vehiculo::getMarca)
-                        .thenComparing(Vehiculo::getCosto))
+                        .thenComparingDouble(Vehiculo::getCosto))
                 .map(Vehiculo::getMarcaPrecio)
                 //.toList() // Si fuera necesario almacenarlos.
                 .forEach(System.out::println);
@@ -39,11 +38,12 @@ public class Ejercicio {
     ---------------------------------------------------------------------
         Podemos utilizar un mapa y sacar las dos listas de una.
         Como sólo hay dos casos, podemos usar partitioningBy,
-        que nos devuelve un Map<Boolean, List<Vehiculo>>.
+        que nos devuelve un Map<Boolean, List<models.Vehiculo>>.
     */
-        Predicate<Vehiculo> esMenorAMil = v -> v.getCosto() < 1000;
+        Predicate<Vehiculo> esMenorAMil = v -> v.getCosto() < 1_000;
         Map<Boolean, List<Vehiculo>> vehiculosPorPrecio = vehiculos.stream()
-                .sorted(comparing(Vehiculo::getMarca).thenComparing(Vehiculo::getModelo))
+                .sorted(comparing(Vehiculo::getMarca)
+                        .thenComparing(Vehiculo::getModelo))
                 .collect(partitioningBy(esMenorAMil));
         //Imprimimos las listas
         vehiculosPorPrecio.entrySet()
@@ -80,11 +80,11 @@ public class Ejercicio {
 
     private static List<Vehiculo> getVehiculos() {
         return List.of(
-                new Vehiculo("Ford", "Fiesta", 1000),
-                new Vehiculo("Ford", "Focus", 1200),
-                new Vehiculo("Ford", "Explorer", 2500),
+                new Vehiculo("Ford", "Fiesta", 1_000),
+                new Vehiculo("Ford", "Focus", 1_200),
+                new Vehiculo("Ford", "Explorer", 2_500),
                 new Vehiculo("Fiat", "Uno", 500),
-                new Vehiculo("Fiat", "Cronos", 1000),
+                new Vehiculo("Fiat", "Cronos", 1_000),
                 new Vehiculo("Fiat", "Torino", 1250),
                 new Vehiculo("Chevrolet", "Aveo", 1250),
                 new Vehiculo("Chevrolet", "Spin", 2500),

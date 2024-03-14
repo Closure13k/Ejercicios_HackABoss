@@ -1,3 +1,5 @@
+package models;
+
 /**
  * Inicia creando una clase Vehículo con los atributos modelo, marca y costo, luego
  * crea una lista de vehículos. Crea además los constructores de las clases y los
@@ -51,7 +53,7 @@ public class Vehiculo {
 
     @Override
     public String toString() {
-        return "Vehiculo{" +
+        return "models.Vehiculo{" +
                 "modelo='" + modelo + '\'' +
                 ", marca='" + marca + '\'' +
                 ", costo=" + costo +
