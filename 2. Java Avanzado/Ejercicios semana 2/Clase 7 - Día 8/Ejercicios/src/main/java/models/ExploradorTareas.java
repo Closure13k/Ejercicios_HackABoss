@@ -22,12 +22,11 @@ public class ExploradorTareas {
         return sb.toString();
     }
 
-    public static Tarea buscarTarea(Tarea proyecto, int idPadre) {
-        if (proyecto.getId() == idPadre) {
-            return proyecto;
+    public static Tarea buscarTarea(Tarea tarea, int idPadre) {
+        if (tarea.getId() == idPadre) {
+            return tarea;
         }
-        List<Tarea> subtareas = proyecto.getSubtareas();
-        for (Tarea subtarea : subtareas) {
+        for (Tarea subtarea : tarea.getSubtareas()) {
             Tarea resultado = buscarTarea(subtarea, idPadre);
             if (resultado != null) {
                 return resultado;
