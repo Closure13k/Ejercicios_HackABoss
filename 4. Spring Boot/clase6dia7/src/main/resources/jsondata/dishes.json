@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "name": "Spaghetti a la bolognesa",
+    "ingredients": [7, 4, 6, 1, 9, 27]
+  },
+  {
+    "id": 2,
+    "name": "Ensalada César",
+    "ingredients": [15, 13, 11, 28, 6]
+  },
+  {
+    "id": 3,
+    "name": "Arroz con pollo",
+    "ingredients": [8, 5, 1, 9, 27]
+  },
+  {
+    "id": 4,
+    "name": "Tacos de carne asada",
+    "ingredients": [6, 3, 21, 17, 27]
+  },
+  {
+    "id": 5,
+    "name": "Pizza Margarita",
+    "ingredients": [14, 4, 13, 9, 22]
+  },
+  {
+    "id": 6,
+    "name": "Hamburguesa clásica",
+    "ingredients": [2, 3, 18, 19, 24]
+  },
+  {
+    "id": 7,
+    "name": "Sushi variado",
+    "ingredients": [20, 23, 25, 26, 29]
+  },
+  {
+    "id": 8,
+    "name": "Enchiladas verdes",
+    "ingredients": [3, 6, 9, 11, 17]
+  },
+  {
+    "id": 9,
+    "name": "Pasta Alfredo",
+    "ingredients": [7, 4, 6, 1, 10]
+  },
+  {
+    "id": 10,
+    "name": "Ensalada de frutas",
+    "ingredients": [12, 16, 30, 13, 11]
+  },
+  {
+    "id": 11,
+    "name": "pruebafrutas",
+    "ingredients": [12, 16, 30, 13, 11]
+  }
+]

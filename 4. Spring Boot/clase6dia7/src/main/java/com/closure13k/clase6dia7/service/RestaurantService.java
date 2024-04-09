@@ -1,0 +1,168 @@
+package com.closure13k.clase6dia7.service;
+
+import com.closure13k.clase6dia7.dto.DishDTO;
+import com.closure13k.clase6dia7.dto.IngredientDTO;
+import com.closure13k.clase6dia7.model.Dish;
+import com.closure13k.clase6dia7.model.Ingredient;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
+
+@Service
+public class RestaurantService implements IRestaurantService {
+    private static final List<Ingredient> INGREDIENTS = new ArrayList<>();
+    private static final List<Dish> DISHES = new ArrayList<>();
+    
+    @Override
+    public DishDTO getDishInfo(String dishName) {
+        Dish dish = getDishByName(dishName);
+        List<Ingredient> ingredients = getIngredients(dish);
+        Double totalCalories = calculateTotalCalories(ingredients);
+        Ingredient mostCaloricIngredient = getMostCaloricIngredient(ingredients);
+        List<IngredientDTO> ingredientDTOs = toDTOs(ingredients);
+
+        return toDTO(dish, totalCalories, mostCaloricIngredient, ingredientDTOs);
+    }
+    
+    
+    /**
+     * Obtiene un plato por su nombre.
+     *
+     * @param dishName Nombre del plato.
+     * @return Plato.
+     * @throws NotFoundException Si no se encuentra el plato.
+     */
+    private Dish getDishByName(String dishName) {
+        return DISHES.stream()
+                .filter(d -> d.getName().equalsIgnoreCase(dishName))
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException(dishName + " no encontrado"));
+    }
+    
+    /**
+     * Obtiene los ingredientes de un plato.
+     *
+     * @param dish Plato.
+     * @return Lista de ingredientes.
+     */
+    private List<Ingredient> getIngredients(Dish dish) {
+        return dish.getIngredients().stream()
+                .map(i -> INGREDIENTS.stream()
+                        .filter(ing -> ing.getId().equals(i))
+                        .findFirst()
+                        .orElseThrow(() -> new NotFoundException("Ingrediente no encontrado: " + i)))
+                .toList();
+    }
+    
+    /**
+     * Calcula la cantidad total de calorías de una lista de ingredientes.
+     *
+     * @param ingredients Lista de ingredientes.
+     * @return Cantidad total de calorías.
+     */
+    private double calculateTotalCalories(List<Ingredient> ingredients) {
+        return ingredients.stream()
+                .mapToDouble(Ingredient::getCalories)
+                .sum();
+    }
+    
+    /**
+     * Obtiene el ingrediente más calórico de una lista de ingredientes.
+     *
+     * @param ingredients Lista de ingredientes.
+     * @return Ingrediente más calórico.
+     * @throws NotFoundException Si no se encuentra el ingrediente más calórico.
+     */
+    private Ingredient getMostCaloricIngredient(List<Ingredient> ingredients) {
+        return ingredients.stream()
+                .max(Comparator.comparing(Ingredient::getCalories))
+                .orElseThrow(() -> new NotFoundException("No se encontró el ingrediente más calórico"));
+    }
+    
+    // DTOs
+    
+    /**
+     * Convierte un ingrediente a un DTO.
+     *
+     * @param dish                  Plato.
+     * @param totalCalories         Cantidad total de calorías.
+     * @param mostCaloricIngredient Ingrediente más calórico.
+     * @param ingredientDTOs        Lista de ingredientes.
+     * @return DTO.
+     */
+    private DishDTO toDTO(Dish dish, Double totalCalories, Ingredient mostCaloricIngredient, List<IngredientDTO> ingredientDTOs) {
+        return DishDTO.builder()
+                .withName(dish.getName())
+                .withPrice(dish.getPrice())
+                .withCalories(totalCalories)
+                .withMostCaloricIngredient(toDTO(mostCaloricIngredient))
+                .withIngredients(ingredientDTOs)
+                .build();
+    }
+    
+    
+    /**
+     * Convierte un ingrediente a un DTO.
+     *
+     * @param mostCaloricIngredient Ingrediente más calórico.
+     * @return DTO.
+     */
+    private static IngredientDTO toDTO(Ingredient mostCaloricIngredient) {
+        return IngredientDTO.builder()
+                .withName(mostCaloricIngredient.getName())
+                .withCalories(mostCaloricIngredient.getCalories())
+                .build();
+    }
+    
+    /**
+     * Convierte una lista de ingredientes a una lista de DTOs.
+     *
+     * @param ingredients Lista de ingredientes.
+     * @return Lista de DTOs.
+     */
+    private List<IngredientDTO> toDTOs(List<Ingredient> ingredients) {
+        return ingredients.stream()
+                .map(RestaurantService::toDTO)
+                .toList();
+    }
+    
+    
+    //<editor-fold desc="Generated code" defaultstate="collapsed">
+    public RestaurantService() {
+        loadDatabase();
+    }
+    
+    private void loadDatabase() {
+        File ingredientsFile;
+        File dishesFile;
+        try {
+            ingredientsFile = ResourceUtils.getFile("classpath:jsondata/ingredients.json");
+            dishesFile = ResourceUtils.getFile("classpath:jsondata/dishes.json");
+        } catch (FileNotFoundException e) {
+            return;
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        TypeReference<List<Ingredient>> ingredientTypeRef = new TypeReference<>() {
+        };
+        TypeReference<List<Dish>> dishTypeRef = new TypeReference<>() {
+        };
+        try {
+            INGREDIENTS.addAll(mapper.readValue(ingredientsFile, ingredientTypeRef));
+            DISHES.addAll(mapper.readValue(dishesFile, dishTypeRef));
+        } catch (Exception ignored){
+            // Ignored
+        }
+    }
+    //</editor-fold>
+    
+    public static class NotFoundException extends RuntimeException {
+        public NotFoundException(String message) {
+            super(message);
+        }
+    }
+}
