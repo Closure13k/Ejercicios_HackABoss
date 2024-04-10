@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "928617c1-8143-4986-8d3f-84ea9a3ee010",
+		"name": "Clases HAB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34042141"
+	},
+	"item": [
+		{
+			"name": "Clase 6",
+			"item": [
+				{
+					"name": "Restaurante",
+					"item": [
+						{
+							"name": "Ingredientes Plato(http://localhost:8080/dish/{name}/ingredients)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/dish/Ensalada%20C%C3%A9sar/ingredients",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dish",
+										"Ensalada%20C%C3%A9sar",
+										"ingredients"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Full info Plato(http://localhost:8080/dish)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\":\"Ensalada César\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/dish",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dish"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Calorías Plato(http://localhost:8080/dish/{name}/calories)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/dish/Ensalada%20C%C3%A9sar/calories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dish",
+										"Ensalada%20C%C3%A9sar",
+										"calories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ingrediente Más Calorías (http://localhost:8080/dish/{name}/mostCaloricIngredient)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/dish/Ensalada%20C%C3%A9sar/mostCaloricIngredient",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"dish",
+										"Ensalada%20C%C3%A9sar",
+										"mostCaloricIngredient"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

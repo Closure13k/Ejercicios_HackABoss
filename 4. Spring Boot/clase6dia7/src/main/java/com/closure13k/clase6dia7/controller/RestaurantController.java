@@ -7,6 +7,7 @@ import com.closure13k.clase6dia7.service.RestaurantService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,10 +21,37 @@ public class RestaurantController {
     }
     
     @GetMapping("/dish")
-    public ResponseEntity<DishDTO> getDishInfo(@RequestBody ObjectNode name) {
+    public ResponseEntity<DishDTO> fetchDishFullInfo(@RequestBody ObjectNode name) {
         
         try {
-            return ResponseEntity.ok(restaurantService.getDishInfo(name.get("name").asText()));
+            return ResponseEntity.ok(restaurantService.fetchDishFullInfo(name.get("name").asText()));
+        } catch (RestaurantService.NotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    @GetMapping("/dish/{name}/calories")
+    public ResponseEntity<DishDTO> fetchDishCalories(@PathVariable String name) {
+        try {
+            return ResponseEntity.ok(restaurantService.fetchDishWithCalories(name));
+        } catch (RestaurantService.NotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    @GetMapping("/dish/{name}/ingredients")
+    public ResponseEntity<DishDTO> fetchDishWithIngredients(@PathVariable String name) {
+        try {
+            return ResponseEntity.ok(restaurantService.fetchDishWithIngredients(name));
+        } catch (RestaurantService.NotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    @GetMapping("/dish/{name}/mostCaloricIngredient")
+    public ResponseEntity<DishDTO> fetchDishMostCaloricIngredient(@PathVariable String name) {
+        try {
+            return ResponseEntity.ok(restaurantService.fetchDishWithMostCaloricIngredient(name));
         } catch (RestaurantService.NotFoundException e) {
             return ResponseEntity.notFound().build();
         }
